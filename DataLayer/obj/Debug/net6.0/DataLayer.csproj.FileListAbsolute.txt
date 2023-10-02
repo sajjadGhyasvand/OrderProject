@@ -12,3 +12,17 @@ C:\Users\S.Ghiasvand\source\repos\SendMessageWithTCPIP\OrderProj\DataLayer\obj\D
 C:\Users\S.Ghiasvand\source\repos\SendMessageWithTCPIP\OrderProj\DataLayer\obj\Debug\net6.0\ref\DataLayer.dll
 C:\Users\S.Ghiasvand\source\repos\SendMessageWithTCPIP\OrderProj\DataLayer\obj\Debug\net6.0\DataLayer.pdb
 C:\Users\S.Ghiasvand\source\repos\SendMessageWithTCPIP\OrderProj\DataLayer\obj\Debug\net6.0\DataLayer.genruntimeconfig.cache
+C:\Users\S.Ghiasvand\source\repos\OrderProject\DataLayer\bin\Debug\net6.0\DataLayer.deps.json
+C:\Users\S.Ghiasvand\source\repos\OrderProject\DataLayer\bin\Debug\net6.0\DataLayer.runtimeconfig.json
+C:\Users\S.Ghiasvand\source\repos\OrderProject\DataLayer\bin\Debug\net6.0\DataLayer.dll
+C:\Users\S.Ghiasvand\source\repos\OrderProject\DataLayer\bin\Debug\net6.0\ref\DataLayer.dll
+C:\Users\S.Ghiasvand\source\repos\OrderProject\DataLayer\bin\Debug\net6.0\DataLayer.pdb
+C:\Users\S.Ghiasvand\source\repos\OrderProject\DataLayer\obj\Debug\net6.0\DataLayer.csproj.AssemblyReference.cache
+C:\Users\S.Ghiasvand\source\repos\OrderProject\DataLayer\obj\Debug\net6.0\DataLayer.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\S.Ghiasvand\source\repos\OrderProject\DataLayer\obj\Debug\net6.0\DataLayer.AssemblyInfoInputs.cache
+C:\Users\S.Ghiasvand\source\repos\OrderProject\DataLayer\obj\Debug\net6.0\DataLayer.AssemblyInfo.cs
+C:\Users\S.Ghiasvand\source\repos\OrderProject\DataLayer\obj\Debug\net6.0\DataLayer.csproj.CoreCompileInputs.cache
+C:\Users\S.Ghiasvand\source\repos\OrderProject\DataLayer\obj\Debug\net6.0\DataLayer.dll
+C:\Users\S.Ghiasvand\source\repos\OrderProject\DataLayer\obj\Debug\net6.0\ref\DataLayer.dll
+C:\Users\S.Ghiasvand\source\repos\OrderProject\DataLayer\obj\Debug\net6.0\DataLayer.pdb
+C:\Users\S.Ghiasvand\source\repos\OrderProject\DataLayer\obj\Debug\net6.0\DataLayer.genruntimeconfig.cache

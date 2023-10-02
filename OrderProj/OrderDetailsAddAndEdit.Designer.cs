@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.ذخیرهToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.انصرافToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.btnSubmitOrderDetail = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnRefuse = new System.Windows.Forms.ToolStripMenuItem();
+            this.cbProduct = new System.Windows.Forms.ComboBox();
             this.txt_UnitPrice = new System.Windows.Forms.TextBox();
             this.txt_Count = new System.Windows.Forms.TextBox();
             this.txtPriceSum = new System.Windows.Forms.TextBox();
@@ -46,41 +46,44 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ذخیرهToolStripMenuItem,
-            this.انصرافToolStripMenuItem});
+            this.btnSubmitOrderDetail,
+            this.btnRefuse});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(295, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
-            // ذخیرهToolStripMenuItem
+            // btnSubmitOrderDetail
             // 
-            this.ذخیرهToolStripMenuItem.Name = "ذخیرهToolStripMenuItem";
-            this.ذخیرهToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
-            this.ذخیرهToolStripMenuItem.Text = "ذخیره";
+            this.btnSubmitOrderDetail.Name = "btnSubmitOrderDetail";
+            this.btnSubmitOrderDetail.Size = new System.Drawing.Size(46, 20);
+            this.btnSubmitOrderDetail.Text = "ذخیره";
+            this.btnSubmitOrderDetail.Click += new System.EventHandler(this.btnSubmitOrderDetail_Click);
             // 
-            // انصرافToolStripMenuItem
+            // btnRefuse
             // 
-            this.انصرافToolStripMenuItem.Name = "انصرافToolStripMenuItem";
-            this.انصرافToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
-            this.انصرافToolStripMenuItem.Text = "انصراف";
+            this.btnRefuse.Name = "btnRefuse";
+            this.btnRefuse.Size = new System.Drawing.Size(56, 20);
+            this.btnRefuse.Text = "انصراف";
+            this.btnRefuse.Click += new System.EventHandler(this.btnRefuse_Click);
             // 
-            // comboBox1
+            // cbProduct
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(41, 67);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(160, 23);
-            this.comboBox1.TabIndex = 1;
+            this.cbProduct.FormattingEnabled = true;
+            this.cbProduct.Location = new System.Drawing.Point(41, 67);
+            this.cbProduct.Name = "cbProduct";
+            this.cbProduct.Size = new System.Drawing.Size(160, 23);
+            this.cbProduct.TabIndex = 1;
+            this.cbProduct.SelectedIndexChanged += new System.EventHandler(this.cbProduct_SelectedIndexChanged);
             // 
             // txt_UnitPrice
             // 
+            this.txt_UnitPrice.Enabled = false;
             this.txt_UnitPrice.Location = new System.Drawing.Point(41, 110);
             this.txt_UnitPrice.Name = "txt_UnitPrice";
             this.txt_UnitPrice.Size = new System.Drawing.Size(160, 23);
             this.txt_UnitPrice.TabIndex = 2;
-            this.txt_UnitPrice.TextChanged += new System.EventHandler(this.txt_UnitPrice_TextChanged);
             // 
             // txt_Count
             // 
@@ -88,6 +91,7 @@
             this.txt_Count.Name = "txt_Count";
             this.txt_Count.Size = new System.Drawing.Size(160, 23);
             this.txt_Count.TabIndex = 3;
+            this.txt_Count.Text = "1";
             this.txt_Count.TextChanged += new System.EventHandler(this.txt_Count_TextChanged);
             // 
             // txtPriceSum
@@ -96,7 +100,6 @@
             this.txtPriceSum.Name = "txtPriceSum";
             this.txtPriceSum.Size = new System.Drawing.Size(160, 23);
             this.txtPriceSum.TabIndex = 3;
-            this.txtPriceSum.TextChanged += new System.EventHandler(this.txtPriceSum_TextChanged);
             // 
             // label1
             // 
@@ -166,12 +169,13 @@
             this.Controls.Add(this.txtPriceSum);
             this.Controls.Add(this.txt_Count);
             this.Controls.Add(this.txt_UnitPrice);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.cbProduct);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "OrderDetailsAddAndEdit";
             this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.Text = "OrderDetailsAddAndEdit";
+            this.Load += new System.EventHandler(this.OrderDetailsAddAndEdit_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -182,9 +186,9 @@
         #endregion
 
         private MenuStrip menuStrip1;
-        private ToolStripMenuItem ذخیرهToolStripMenuItem;
-        private ToolStripMenuItem انصرافToolStripMenuItem;
-        private ComboBox comboBox1;
+        private ToolStripMenuItem btnSubmitOrderDetail;
+        private ToolStripMenuItem btnRefuse;
+        private ComboBox cbProduct;
         private TextBox txt_UnitPrice;
         private TextBox txt_Count;
         private TextBox txtPriceSum;

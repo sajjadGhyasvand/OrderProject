@@ -29,5 +29,60 @@ namespace DataLayer.Context
                 optionsBuilder.UseSqlServer("Server=.;Database=InvoiceDB;Trusted_Connection=True;");
             }
         }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Personal>()
+                .HasData(
+                 new Personal()
+                 {
+                     Id=1,
+                     Name = "غیاثوند",
+                     CompanyName ="تست یک",
+                     Email = " saj@saj.com",
+                     Phone = " 0930",
+                 },
+                 new Personal()
+                 {
+                     Id= 2,
+                     Name = "جعفری",
+                     CompanyName ="تست دو",
+                     Email = " j@j.com",
+                     Phone = " 0939",
+                 },
+                 new Personal()
+                 {
+                     Id = 3,
+                     Name = "چگونیان",
+                     CompanyName ="تست سه",
+                     Email = " ch@ch.com",
+                     Phone = " 0912",
+                 }
+                );
+            modelBuilder.Entity<Product>().HasData(
+                    new Product()
+                    {
+                        Id=1,
+                        Name = "محصول یک",
+                        Code = 001,
+                        Price = 320000,
+                    },
+                    new Product()
+                    {
+                        Id=2,
+                        Name = "محصول دو",
+                        Code = 005,
+                        Price = 920000,
+                    },
+                   new Product()
+                   {
+                       Id=3,
+                       Name = "محصول سه",
+                       Code = 006,
+                       Price = 4700000,
+                   }
+                );
+
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

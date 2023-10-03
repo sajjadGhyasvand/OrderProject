@@ -90,6 +90,26 @@ namespace DataLayer.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.InsertData(
+                table: "Personals",
+                columns: new[] { "Id", "CompanyName", "Email", "Name", "Phone" },
+                values: new object[,]
+                {
+                    { 1, "تست یک", " saj@saj.com", "غیاثوند", " 0930" },
+                    { 2, "تست دو", " j@j.com", "جعفری", " 0939" },
+                    { 3, "تست سه", " ch@ch.com", "چگونیان", " 0912" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Products",
+                columns: new[] { "Id", "Code", "Name", "Price" },
+                values: new object[,]
+                {
+                    { 1, 1, "محصول یک", 320000.0 },
+                    { 2, 5, "محصول دو", 920000.0 },
+                    { 3, 6, "محصول سه", 4700000.0 }
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_OrderDetails_OrderId",
                 table: "OrderDetails",

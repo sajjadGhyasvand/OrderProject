@@ -16,6 +16,7 @@ namespace DataLayer.Models
         public int PersonalId { get; set; }
         [Required]
         public int Number { get; set; }
+        public bool IsDelete { get; set; }
         public DateTime Date  { get; set; }
         public Personal Personal { get; set; }
 

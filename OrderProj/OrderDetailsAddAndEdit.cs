@@ -48,7 +48,6 @@ namespace OrderProj
                 cbProduct.SelectedItem = products.Where(x => x.Name == _orderDetailViewModel.ProductName).Select(x => x.Name).FirstOrDefault();
                 txt_Count.Text = _orderDetailViewModel.Count.ToString();
             }
-
         }
         private void cbProduct_SelectedIndexChanged(object sender, EventArgs e)
         {

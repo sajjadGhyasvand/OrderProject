@@ -31,12 +31,11 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.ایجادToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnEdit = new System.Windows.Forms.ToolStripMenuItem();
-            this.حذفToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.btnSearch = new System.Windows.Forms.ToolStripMenuItem();
             this.خروجToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.dpToDate = new System.Windows.Forms.DateTimePicker();
-            this.dpFromDate = new System.Windows.Forms.DateTimePicker();
+            this.pdFromDate = new System.Windows.Forms.PersianDatePicker();
             this.cbCustomer = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -46,6 +45,7 @@
             this.PersonalName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SumPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pdToDate = new System.Windows.Forms.PersianDatePicker();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgOrder)).BeginInit();
@@ -56,7 +56,7 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ایجادToolStripMenuItem,
             this.btnEdit,
-            this.حذفToolStripMenuItem,
+            this.btnDelete,
             this.btnSearch,
             this.خروجToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
@@ -79,11 +79,12 @@
             this.btnEdit.Text = "ویرایش";
             this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
-            // حذفToolStripMenuItem
+            // btnDelete
             // 
-            this.حذفToolStripMenuItem.Name = "حذفToolStripMenuItem";
-            this.حذفToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.حذفToolStripMenuItem.Text = "حذف";
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(44, 20);
+            this.btnDelete.Text = "حذف";
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnSearch
             // 
@@ -101,8 +102,8 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.dpToDate);
-            this.groupBox1.Controls.Add(this.dpFromDate);
+            this.groupBox1.Controls.Add(this.pdToDate);
+            this.groupBox1.Controls.Add(this.pdFromDate);
             this.groupBox1.Controls.Add(this.cbCustomer);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
@@ -114,19 +115,21 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "جست و جو";
             // 
-            // dpToDate
+            // pdFromDate
             // 
-            this.dpToDate.Location = new System.Drawing.Point(86, 64);
-            this.dpToDate.Name = "dpToDate";
-            this.dpToDate.Size = new System.Drawing.Size(200, 23);
-            this.dpToDate.TabIndex = 3;
-            // 
-            // dpFromDate
-            // 
-            this.dpFromDate.Location = new System.Drawing.Point(86, 28);
-            this.dpFromDate.Name = "dpFromDate";
-            this.dpFromDate.Size = new System.Drawing.Size(200, 23);
-            this.dpFromDate.TabIndex = 2;
+            this.pdFromDate.AutoSize = true;
+            this.pdFromDate.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.pdFromDate.BackColor = System.Drawing.Color.White;
+            this.pdFromDate.GeorgianDate = null;
+            this.pdFromDate.Location = new System.Drawing.Point(13, 27);
+            this.pdFromDate.Margin = new System.Windows.Forms.Padding(0);
+            this.pdFromDate.Name = "pdFromDate";
+            this.pdFromDate.PersianDate.Day = 0;
+            this.pdFromDate.PersianDate.Month = 0;
+            this.pdFromDate.PersianDate.Year = 0;
+            this.pdFromDate.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.pdFromDate.Size = new System.Drawing.Size(288, 24);
+            this.pdFromDate.TabIndex = 6;
             // 
             // cbCustomer
             // 
@@ -139,7 +142,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(314, 67);
+            this.label3.Location = new System.Drawing.Point(314, 70);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(41, 15);
             this.label3.TabIndex = 0;
@@ -148,7 +151,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(315, 33);
+            this.label2.Location = new System.Drawing.Point(315, 32);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(42, 15);
             this.label2.TabIndex = 0;
@@ -157,7 +160,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(633, 36);
+            this.label1.Location = new System.Drawing.Point(637, 36);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(44, 15);
             this.label1.TabIndex = 0;
@@ -167,6 +170,7 @@
             // 
             this.dgOrder.AllowUserToAddRows = false;
             this.dgOrder.AllowUserToDeleteRows = false;
+            this.dgOrder.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgOrder.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgOrder.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.InvoiceNumber,
@@ -205,6 +209,22 @@
             this.SumPrice.Name = "SumPrice";
             this.SumPrice.ReadOnly = true;
             // 
+            // pdToDate
+            // 
+            this.pdToDate.AutoSize = true;
+            this.pdToDate.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.pdToDate.BackColor = System.Drawing.Color.White;
+            this.pdToDate.GeorgianDate = null;
+            this.pdToDate.Location = new System.Drawing.Point(13, 67);
+            this.pdToDate.Margin = new System.Windows.Forms.Padding(0);
+            this.pdToDate.Name = "pdToDate";
+            this.pdToDate.PersianDate.Day = 0;
+            this.pdToDate.PersianDate.Month = 0;
+            this.pdToDate.PersianDate.Year = 0;
+            this.pdToDate.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.pdToDate.Size = new System.Drawing.Size(288, 24);
+            this.pdToDate.TabIndex = 7;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -233,7 +253,7 @@
         private MenuStrip menuStrip1;
         private ToolStripMenuItem ایجادToolStripMenuItem;
         private ToolStripMenuItem btnEdit;
-        private ToolStripMenuItem حذفToolStripMenuItem;
+        private ToolStripMenuItem btnDelete;
         private ToolStripMenuItem btnSearch;
         private ToolStripMenuItem خروجToolStripMenuItem;
         private GroupBox groupBox1;
@@ -242,11 +262,11 @@
         private Label label2;
         private Label label1;
         private DataGridView dgOrder;
-        private DateTimePicker dpToDate;
-        private DateTimePicker dpFromDate;
         private DataGridViewTextBoxColumn InvoiceNumber;
         private DataGridViewTextBoxColumn PersonalName;
         private DataGridViewTextBoxColumn Date;
         private DataGridViewTextBoxColumn SumPrice;
+        private PersianDatePicker pdFromDate;
+        private PersianDatePicker pdToDate;
     }
 }

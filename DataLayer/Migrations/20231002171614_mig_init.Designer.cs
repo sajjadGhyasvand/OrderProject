@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataLayer.Migrations
 {
     [DbContext(typeof(OrderContext))]
-    [Migration("20231001114801_mig_init")]
+    [Migration("20231002171614_mig_init")]
     partial class mig_init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -110,6 +110,32 @@ namespace DataLayer.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Personals");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CompanyName = "تست یک",
+                            Email = " saj@saj.com",
+                            Name = "غیاثوند",
+                            Phone = " 0930"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CompanyName = "تست دو",
+                            Email = " j@j.com",
+                            Name = "جعفری",
+                            Phone = " 0939"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CompanyName = "تست سه",
+                            Email = " ch@ch.com",
+                            Name = "چگونیان",
+                            Phone = " 0912"
+                        });
                 });
 
             modelBuilder.Entity("DataLayer.Models.Product", b =>
@@ -134,6 +160,29 @@ namespace DataLayer.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Products");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Code = 1,
+                            Name = "محصول یک",
+                            Price = 320000.0
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Code = 5,
+                            Name = "محصول دو",
+                            Price = 920000.0
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Code = 6,
+                            Name = "محصول سه",
+                            Price = 4700000.0
+                        });
                 });
 
             modelBuilder.Entity("DataLayer.Models.Order", b =>

@@ -1,6 +1,9 @@
 using DataLayer.Context;
+using DataLayer.Models;
 using DataLayer.ViewModels;
 using Microsoft.EntityFrameworkCore;
+using System.Globalization;
+using System.Windows.Forms;
 
 namespace OrderProj
 {
@@ -28,9 +31,12 @@ namespace OrderProj
         private void MainForm_Load(object sender, EventArgs e)
         {
             cbCustomer.DataSource = _context.Personals.Select(x => x.Name).ToList();
-            dpFromDate.Value = DateTime.Now.AddMonths(-1);
-            dpToDate.Value = DateTime.Now;
-            var data = _context.Orders.Include(x => x.Personal).Include(x => x.OrderDetails).ToList();
+            /*dpFromDate.Value = DateTime.Now.AddMonths(-1);
+            dpToDate.Value = DateTime.Now;*/
+            pdFromDate.GeorgianDate = DateTime.Now.AddMonths(-1);
+            pdToDate.GeorgianDate = DateTime.Now;
+
+            var data = _context.Orders.Where(x=>!x.IsDelete).Include(x => x.Personal).Include(x => x.OrderDetails).ToList();
             foreach (var order in data)
             {
                 double priceSum = 0;
@@ -46,8 +52,9 @@ namespace OrderProj
         private void btnSearch_Click(object sender, EventArgs e)
         {
             var Person = _context.Personals.Where(p => p.Name == cbCustomer.Text).FirstOrDefault();
-            var Orders = _context.Orders.Where(o => o.PersonalId == Person.Id && o.Date >= dpFromDate.Value && o.Date <= dpToDate.Value).Include(x => x.Personal).Include(x => x.OrderDetails).ToList();
+            var Orders = _context.Orders.Where(o => o.PersonalId == Person.Id && o.Date >= pdFromDate.GeorgianDate.Value.Date && o.Date <= pdToDate.GeorgianDate.Value.Date).Include(x => x.Personal).Include(x => x.OrderDetails).ToList();
             dgOrder.Rows.Clear();
+
             foreach (var order in Orders)
             {
                 double priceSum = 0;
@@ -74,6 +81,16 @@ namespace OrderProj
         private void dgOrder_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             rowIndex = e.RowIndex;
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            var OrderNumber = dgOrder.CurrentRow.Cells[0].Value.ToString();
+            var Order = _context.Orders.Where(o => o.Number == Convert.ToInt32(OrderNumber)).FirstOrDefault();
+            Order.IsDelete = true;
+            _context.SaveChanges();
+            dgOrder.Rows.RemoveAt(rowIndex);
+            rowIndex = -1;
         }
     }
 }

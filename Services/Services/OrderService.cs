@@ -1,13 +1,20 @@
-﻿using Services.InterFaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DataLayer.Context;
+using Services.Interfaces;
 
 namespace Services.Services
 {
-    public class OrderService : IOrderService
+    public class OrderService 
     {
+        private OrderContext _context = new();
+
+        public OrderService(OrderContext context)
+        {
+            _context = context;
+        }
+
+        public List<string> GetAll()
+        {
+            return _context.Personals.Select(x => x.Name).ToList();
+        }
     }
 }

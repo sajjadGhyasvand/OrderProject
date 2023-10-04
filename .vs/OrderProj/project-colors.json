@@ -15,7 +15,12 @@
       "ProjectGuid": "2d566457-eabc-439a-ba4c-08aeff838d37",
       "DisplayName": "OrderProj",
       "ColorIndex": 1
+    },
+    "d4961e04-1f3d-422d-84af-5a9771012e7c": {
+      "ProjectGuid": "d4961e04-1f3d-422d-84af-5a9771012e7c",
+      "DisplayName": "Services",
+      "ColorIndex": 2
     }
   },
-  "NextColorIndex": 2
+  "NextColorIndex": 3
 }

@@ -1,6 +1,5 @@
-using DataLayer.Context;
+﻿using DataLayer.Context;
 using DataLayer.Models;
-using DataLayer.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using System.Globalization;
 using System.Windows.Forms;
@@ -16,73 +15,38 @@ namespace OrderProj
         {
             InitializeComponent();
         }
-
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            InitData();
+            var data = _context.Orders.Where(x => !x.IsDelete).Include(x => x.Personal).Include(x => x.OrderDetails).ToList();
+            AddOrderToDataGrid(dgOrder, data);
+        }
+        private void Create_Click(object sender, EventArgs e)
+        {
+            OrderAddAndEdit orderForm = new OrderAddAndEdit(dgOrder, 0);
+            orderForm.ShowDialog();
+        }
         private void Exit(object sender, EventArgs e)
         {
             Application.Exit();
         }
-
-        private void Create_Click(object sender, EventArgs e)
-        {
-            OrderAddAndEdit orderForm = new OrderAddAndEdit(dgOrder,0);
-            orderForm.ShowDialog();
-        }
-
-        private void MainForm_Load(object sender, EventArgs e)
-        {
-            cbCustomer.DataSource = _context.Personals.Select(x => x.Name).ToList();
-            /*dpFromDate.Value = DateTime.Now.AddMonths(-1);
-            dpToDate.Value = DateTime.Now;*/
-            pdFromDate.GeorgianDate = DateTime.Now.AddMonths(-1);
-            pdToDate.GeorgianDate = DateTime.Now;
-
-            var data = _context.Orders.Where(x=>!x.IsDelete).Include(x => x.Personal).Include(x => x.OrderDetails).ToList();
-            foreach (var order in data)
-            {
-                double priceSum = 0;
-                foreach (var orderDetail in order.OrderDetails)
-                {
-                    priceSum += orderDetail.SumPrice;
-                }
-                object[] row = new object[] { order.Number, order.Personal.Name, order.Date, priceSum };
-                dgOrder.Rows.Add(row);
-            }
-        }
-
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            var Person = _context.Personals.Where(p => p.Name == cbCustomer.Text).FirstOrDefault();
-            var Orders = _context.Orders.Where(o => o.PersonalId == Person.Id && o.Date >= pdFromDate.GeorgianDate.Value.Date && o.Date <= pdToDate.GeorgianDate.Value.Date).Include(x => x.Personal).Include(x => x.OrderDetails).ToList();
+            var Person = _context.Personals.FirstOrDefault(p => p.Name == cbCustomer.Text);
+            var Orders = _context.Orders.Where(o => o.PersonalId == Person.Id && o.Date >= pdFromDate.GeorgianDate.Value.Date && o.Date <= pdToDate.GeorgianDate.Value.Date && !o.IsDelete).Include(x => x.Personal).Include(x => x.OrderDetails).ToList();
             dgOrder.Rows.Clear();
-
-            foreach (var order in Orders)
-            {
-                double priceSum = 0;
-                foreach (var orderDetail in order.OrderDetails)
-                {
-                    priceSum += orderDetail.SumPrice;
-                }
-                object[] row = new object[] { order.Id, order.Personal.Name, order.Date, priceSum };
-                dgOrder.Rows.Add(row);
-            }
+            AddOrderToDataGrid(dgOrder, Orders);
         }
-
         private void btnEdit_Click(object sender, EventArgs e)
         {
             if (rowIndex >= 0 && dgOrder.RowCount >= 1)
             {
                 var OrderNumber = dgOrder.CurrentRow.Cells[0].Value.ToString();
-                var OrderId = _context.Orders.Where(o=>o.Number == Convert.ToInt32(OrderNumber)).FirstOrDefault().Id;
+                var OrderId = _context.Orders.FirstOrDefault(o => o.Number == Convert.ToInt32(OrderNumber)).Id;
                 OrderAddAndEdit orderAndEdit = new OrderAddAndEdit(dgOrder,OrderId);
                 orderAndEdit.ShowDialog();
             }
         }
-
-        private void dgOrder_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            rowIndex = e.RowIndex;
-        }
-
         private void btnDelete_Click(object sender, EventArgs e)
         {
             var OrderNumber = dgOrder.CurrentRow.Cells[0].Value.ToString();
@@ -92,5 +56,42 @@ namespace OrderProj
             dgOrder.Rows.RemoveAt(rowIndex);
             rowIndex = -1;
         }
+        private void dgOrder_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            rowIndex = e.RowIndex;
+        }
+
+
+
+        #region Fuctions
+        //اطلاعات اولیه 
+        private void InitData()
+        {
+            cbCustomer.DataSource = _context.Personals.Select(x => x.Name).ToList();
+            pdFromDate.GeorgianDate = DateTime.Now.AddMonths(-1);
+            pdToDate.GeorgianDate = DateTime.Now;
+        }
+        //ثبت اطلاعات در دیتاگرید
+        private void AddOrderToDataGrid(DataGridView dgView, List<Order> orders)
+        {
+            foreach (var order in orders)
+            {
+                double priceSum = 0;
+                foreach (var orderDetail in order.OrderDetails)
+                {
+                    priceSum += orderDetail.SumPrice;
+                }
+                object[] row = new object[] { order.Number, order.Personal.Name, ToShamsi(order.Date), priceSum };
+                dgView.Rows.Add(row);
+            }
+        }
+        //تبدیل تاریخ میلادی به شمسی
+        public string ToShamsi(DateTime date)
+        {
+            if (date == new DateTime()) return "";
+            var pc = new PersianCalendar();
+            return $"{pc.GetYear(date)}/{pc.GetMonth(date):00}/{pc.GetDayOfMonth(date):00}";
+        }
+        #endregion
     }
 }

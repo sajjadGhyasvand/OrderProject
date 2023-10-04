@@ -26,7 +26,7 @@ namespace DataLayer.Context
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=.;Database=InvoiceDB;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Server=.;Database=OrderTestDB;Trusted_Connection=True;");
             }
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)

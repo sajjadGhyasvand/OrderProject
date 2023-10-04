@@ -44,7 +44,7 @@
             this.Count = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SumPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.DPDate = new System.Windows.Forms.DateTimePicker();
+            this.pdDate = new System.Windows.Forms.PersianDatePicker();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgOrderItem)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -143,6 +143,7 @@
             // 
             this.dgOrderItem.AllowUserToAddRows = false;
             this.dgOrderItem.AllowUserToDeleteRows = false;
+            this.dgOrderItem.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgOrderItem.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgOrderItem.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ProductName,
@@ -190,7 +191,7 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.DPDate);
+            this.groupBox2.Controls.Add(this.pdDate);
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Controls.Add(this.dgOrderItem);
             this.groupBox2.Controls.Add(this.btnDeleteItem);
@@ -205,12 +206,21 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "اطلاعات سفارش";
             // 
-            // DPDate
+            // pdDate
             // 
-            this.DPDate.Location = new System.Drawing.Point(66, 33);
-            this.DPDate.Name = "DPDate";
-            this.DPDate.Size = new System.Drawing.Size(200, 23);
-            this.DPDate.TabIndex = 6;
+            this.pdDate.AutoSize = true;
+            this.pdDate.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.pdDate.BackColor = System.Drawing.Color.White;
+            this.pdDate.GeorgianDate = null;
+            this.pdDate.Location = new System.Drawing.Point(22, 32);
+            this.pdDate.Margin = new System.Windows.Forms.Padding(0);
+            this.pdDate.Name = "pdDate";
+            this.pdDate.PersianDate.Day = 0;
+            this.pdDate.PersianDate.Month = 0;
+            this.pdDate.PersianDate.Year = 0;
+            this.pdDate.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.pdDate.Size = new System.Drawing.Size(288, 24);
+            this.pdDate.TabIndex = 7;
             // 
             // OrderAddAndEdit
             // 
@@ -252,6 +262,6 @@
         private DataGridViewTextBoxColumn UnitPrice;
         private DataGridViewTextBoxColumn Count;
         private DataGridViewTextBoxColumn SumPrice;
-        private DateTimePicker DPDate;
+        private PersianDatePicker pdDate;
     }
 }

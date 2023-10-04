@@ -16,16 +16,25 @@ namespace OrderProj
 {
     public partial class OrderDetailsAddAndEdit : Form
     {
+
+
+        #region Parameters
         private OrderContext _context = new OrderContext();
         private DataGridView _dgGrideView;
         private OrderDetailViewModel _orderDetailViewModel;
+        List<Product> products = new();
+        Product selectedProduct = new();
+        #endregion
+
+        #region Constructor
         public OrderDetailsAddAndEdit(DataGridView dgGrideView, OrderDetailViewModel orderDetailViewModel)
         {
             InitializeComponent();
             _dgGrideView=dgGrideView;
             _orderDetailViewModel=orderDetailViewModel;
         }
-        Product selectedProduct = new();
+        #endregion
+
         private void txt_Count_TextChanged(object sender, EventArgs e)
         {
             if (String.IsNullOrWhiteSpace(txt_Count.Text))
@@ -38,7 +47,6 @@ namespace OrderProj
                 ChangeDigit(sum, txtPriceSum);
             }
         }
-        List<Product> products = new();
         private void OrderDetailsAddAndEdit_Load(object sender, EventArgs e)
         {
             products = _context.Products.ToList();
@@ -51,8 +59,7 @@ namespace OrderProj
         }
         private void cbProduct_SelectedIndexChanged(object sender, EventArgs e)
         {
-            selectedProduct = products.Where(x => x.Name == cbProduct.SelectedValue.ToString()).FirstOrDefault();
-            /*txt_UnitPrice.Text = selectedProduct.Price.ToString();*/
+            selectedProduct = products.FirstOrDefault(x => x.Name == cbProduct.SelectedValue.ToString());
             ChangeDigit(selectedProduct.Price.ToString(), txt_UnitPrice);
             var sum = (selectedProduct.Price * (Convert.ToInt32(txt_Count.Text))).ToString();
             ChangeDigit(sum, txtPriceSum);
@@ -82,7 +89,7 @@ namespace OrderProj
             this.Close();
         }
 
-
+        #region Functions
         private void ChangeDigit(string enter, TextBox exit)
         {
             decimal dcPrice;
@@ -90,5 +97,9 @@ namespace OrderProj
             exit.Text = dcPrice.ToString("#,#");
             exit.SelectionStart = txtPriceSum.Text.Length;
         }
+
+
+        #endregion
+
     }
 }
